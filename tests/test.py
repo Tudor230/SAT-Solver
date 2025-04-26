@@ -160,7 +160,7 @@ def plot_results(results, folder_path):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Benchmark DPLL solver with memory profiling.")
     parser.add_argument("--folder", type=str, default="tests/uf20-91", help="Folder containing CNF files.")
-    parser.add_argument("--methods", type=str, nargs="+", default=["first", "random", "MAXO", "MOMS", "MAMS", "JW", "GUP", "SUP"], help="List of methods to test.")
+    parser.add_argument("--methods", type=str, nargs="+", default=["first", "random", "MAXO", "MOMS", "MAMS", "JW", "GUP"], help="List of methods to test.")
     args = parser.parse_args()
 
     # Run benchmark

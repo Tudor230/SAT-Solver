@@ -52,7 +52,7 @@ def select_literal(clauses, indentation, verbose=True, method="first"):
         for l in literal_set:
             # Try setting l = True
             score = count_unit_propagations(clauses, l, indentation, verbose)
-            if method == "GUP" and (score == -1 or score == float('inf')):
+            if method == "GUP" and (score == 0 or score == float('inf')):
                 return l  # Immediate contradiction OR immediate satisfaction
             if score > best_score:
                 best_score = score
@@ -71,8 +71,6 @@ def select_literal(clauses, indentation, verbose=True, method="first"):
             if score > best_score:
                 best_score = score
                 best_literal = l
-        if not best_literal:
-            return candidates[0]
         return best_literal
 
     raise ValueError(f"Unknown selection method: {method}")
@@ -86,7 +84,7 @@ def count_unit_propagations(clauses, literal, indentation, verbose):
     new_clauses = clauses + [frozenset([literal])]
     result, count = unit_propagation(new_clauses, indentation, verbose = False)
     if result is False:
-        return -1  # conflict
+        return 0  # conflict
     if not result:
         return float("inf")
     return count
