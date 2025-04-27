@@ -1,10 +1,11 @@
 import os
 import time
 import argparse
-import psutil
 import gc
+import numpy as np
 import matplotlib.pyplot as plt
 from memory_profiler import memory_usage
+from matplotlib.ticker import ScalarFormatter, LogLocator, LogFormatter
 from solver.solver import *
 
 
@@ -56,6 +57,7 @@ def test_folder(folder_path, method="first"):
     files = sorted(f for f in os.listdir(folder_path) if f.endswith(".cnf"))
 
     for file_name in files:
+        print(f"Testing {file_name} with method {method}")
         file_path = os.path.join(folder_path, file_name)
         elapsed_time, avg_memory_usage, splits, result = solve_cnf_file(file_path, method=method)
         times.append(elapsed_time)
@@ -72,7 +74,7 @@ def test_folder(folder_path, method="first"):
     time.sleep(0.1)
 
     # Plot results
-    plot_memory_usage(memory_data)
+    # plot_memory_usage(memory_data)
 
     avg_time = sum(times) / len(times) if times else 0
     avg_memory = sum(memory_usages) / len(memory_usages) if memory_usages else 0
@@ -128,6 +130,8 @@ def plot_results(results, folder_path):
     plt.title("Average Solving Time per Branching Method")
     plt.xticks(rotation=45)
     plt.grid(axis='y')
+    plt.yscale('log')
+    plt.gca()
     plt.tight_layout()
     plt.savefig(f"{folder_name}_benchmark_time.png")
     print("Saved time plot to benchmark_time.png")
@@ -152,19 +156,48 @@ def plot_results(results, folder_path):
     plt.title("Average Splits per Branching Method")
     plt.xticks(rotation=45)
     plt.grid(axis='y')
+    plt.yscale('log')
+    ax = plt.gca()
+    ax.yaxis.set_major_locator(plt.NullLocator())
+    ax.yaxis.set_minor_locator(plt.NullLocator())
+    yticks = sorted(set([round(s, -int(np.floor(np.log10(s)))) for s in splits]))
+    ax.set_yticks(yticks)
+    ax.set_yticklabels([f"{int(t):,}" for t in yticks])
+    ax.grid(False)
+    for y in yticks:
+        ax.axhline(y, color='gray', linestyle='--', linewidth=0.5)
     plt.tight_layout()
     plt.savefig(f"{folder_name}_benchmark_splits.png")
     print("Saved splits plot to benchmark_splits.png")
+
+
+def save_results_to_file(results, folder_path, filename="benchmark_results.txt"):
+    """Save benchmark results to a text file."""
+    folder_name = os.path.basename(os.path.normpath(folder_path))
+    full_path = os.path.join(folder_name + "_" + filename)
+    with open(full_path, "w") as f:
+        f.write(f"Benchmark Results for folder: {folder_path}\n\n")
+        for method, data in results.items():
+            f.write(f"Method: {method}\n")
+            f.write(f"  Average Time: {data['time']:.4f} seconds\n")
+            f.write(f"  Average Memory Usage: {data['memory']:.2f} KB\n")
+            f.write(f"  Average Splits: {data['splits']}\n")
+            if data['failed_files']:
+                f.write(f"  Failed Files: {', '.join(data['failed_files'])}\n")
+            else:
+                f.write("  Failed Files: None\n")
+            f.write("\n")
+    print(f"Saved benchmark results to {full_path}")
 
 # Main function to run the benchmark
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Benchmark DPLL solver with memory profiling.")
     parser.add_argument("--folder", type=str, default="tests/uf20-91", help="Folder containing CNF files.")
-    parser.add_argument("--methods", type=str, nargs="+", default=["first", "random", "MAXO", "MOMS", "MAMS", "JW", "GUP"], help="List of methods to test.")
+    parser.add_argument("--methods", type=str, nargs="+", default=["first", "MAXO", "MOMS", "MAMS", "JW", "GUP", "SUP"], help="List of methods to test.")
     args = parser.parse_args()
 
     # Run benchmark
     results = benchmark_methods(args.folder, methods=args.methods)
 
-    # Optionally plot time and memory usage
-    plot_results(results, args.folder)
+    # plot_results(results, args.folder)
+    save_results_to_file(results, args.folder)
