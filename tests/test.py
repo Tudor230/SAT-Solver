@@ -2,7 +2,6 @@ import os
 import time
 import argparse
 import gc
-from memory_profiler import memory_usage
 from solver.solver import *
 
 
@@ -11,11 +10,9 @@ def solve_cnf_file(file_path, method="first", verbose=False):
     num_vars, num_clauses, clauses = parse_dimacs_cnf(file_path)
     solver_clauses = convert_clauses_to_solver_format(clauses)
 
-    # Measure memory before solving
     start_time = time.perf_counter()
     splits = [0]
     result = [False]
-    # Track memory usage over time using memory_usage
     def run_solver():
         """Run the solver function inside a memory tracking context."""
         if method == "resolution":
@@ -26,20 +23,14 @@ def solve_cnf_file(file_path, method="first", verbose=False):
             result[0], splits[0] = dpll(solver_clauses, method=method, verbose=verbose)
         return
 
-    # Track memory usage during the solving process
-    memory_usage_list = memory_usage(run_solver)  # Memory usage over time while running solver
-
+    run_solver()
     end_time = time.perf_counter()
     elapsed_time = end_time - start_time
-    # Calculate average memory usage during the solving process
-    avg_memory_usage = sum(memory_usage_list) / len(memory_usage_list) if memory_usage_list else 0
-    return elapsed_time, avg_memory_usage, splits[0], result[0]
+    return elapsed_time, splits[0], result[0]
 
 def test_folder(folder_path, method="first"):
     times = []
-    memory_usages = []
     splits_data = []
-    memory_data = []
     satisfiable = True
     failed_files = []
 
@@ -48,11 +39,9 @@ def test_folder(folder_path, method="first"):
     for file_name in files:
         print(f"Testing {file_name} with method {method}")
         file_path = os.path.join(folder_path, file_name)
-        elapsed_time, avg_memory_usage, splits, result = solve_cnf_file(file_path, method=method)
+        elapsed_time, splits, result = solve_cnf_file(file_path, method=method)
         times.append(elapsed_time)
-        memory_usages.append(avg_memory_usage)
         splits_data.append(splits)
-        memory_data.append((elapsed_time, avg_memory_usage))
 
         if not result:
             satisfiable = False
@@ -61,24 +50,21 @@ def test_folder(folder_path, method="first"):
     gc.collect()
 
     avg_time = sum(times) / len(times) if times else 0
-    avg_memory = sum(memory_usages) / len(memory_usages) if memory_usages else 0
     avg_splits = sum(splits_data) / len(splits_data) if splits_data else 0
-    return satisfiable, avg_time, avg_memory, avg_splits, failed_files
+    return satisfiable, avg_time, avg_splits, failed_files
 
 def benchmark_methods(folder_path, methods):
     results = {}
     for method in methods:
         print(f"\nTesting method: {method}")
-        satisfiable, avg_time, avg_memory, avg_splits, failed_files = test_folder(folder_path, method=method)
+        satisfiable, avg_time, avg_splits, failed_files = test_folder(folder_path, method=method)
         print(f"Status: {"OK" if satisfiable else "FAILED"}")
         print(f"Average time for {method}: {avg_time:.4f} seconds")
-        print(f"Average memory usage for {method}: {avg_memory:.2f} KB")
         print(f"Average splits for {method}: {avg_splits}")
         if failed_files:
             print(f"Files failed for {method}: {failed_files}")
         results[method] = {
             "time": avg_time,
-            "memory": avg_memory,
             "splits": avg_splits,
             "failed_files": failed_files
         }
@@ -94,7 +80,6 @@ def save_results_to_file(results, folder_path, filename="benchmark_results.txt")
         for method, data in results.items():
             f.write(f"Method: {method}\n")
             f.write(f"  Average Time: {data['time']:.4f} seconds\n")
-            f.write(f"  Average Memory Usage: {data['memory']:.2f} KB\n")
             f.write(f"  Average Splits: {data['splits']}\n")
             if data['failed_files']:
                 f.write(f"  Failed Files: {', '.join(data['failed_files'])}\n")
