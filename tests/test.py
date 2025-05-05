@@ -2,7 +2,8 @@ import os
 import time
 import argparse
 import gc
-from solver.solver import *
+from solver.solver import solve
+from solver.parser import parse_dimacs_cnf, convert_clauses_to_solver_format
 
 
 def solve_cnf_file(file_path, method="first", verbose=False):
@@ -16,11 +17,11 @@ def solve_cnf_file(file_path, method="first", verbose=False):
     def run_solver():
         """Run the solver function inside a memory tracking context."""
         if method == "resolution":
-            result[0] = resolution(solver_clauses, dp=False, verbose=verbose)
+            result[0] = solve(solver_clauses, method, verbose=verbose)
         elif method == "dp":
-            result[0] = resolution(solver_clauses, dp=True, verbose=verbose)
+            result[0] = solve(solver_clauses, method, verbose=verbose)
         else:
-            result[0], splits[0] = dpll(solver_clauses, method=method, verbose=verbose)
+            result[0], splits[0] = solve(solver_clauses, branching_method=method, verbose=verbose)
         return
 
     run_solver()
