@@ -15,7 +15,6 @@ def solve_cnf_file(file_path, method="first", verbose=False):
     splits = [0]
     result = [False]
     def run_solver():
-        """Run the solver function inside a memory tracking context."""
         if method == "resolution":
             result[0] = solve(solver_clauses, method, verbose=verbose)
         elif method == "dp":
