@@ -75,35 +75,36 @@ def _resolution_core(clauses, dp=True, verbose=True):
                     clauses_set.add(frozenset(resolvent))
                     new.add(frozenset(resolvent))
                     step += 1
-                if new and dp:
-                    new_clauses = clauses + list(new)
-                    unit_clauses, counter = unit_propagation(new_clauses, verbose=verbose)
-                    if unit_clauses is False:
-                        if verbose:
-                            print("Result: UNSATISFIABLE")
-                        return False
-                    if not unit_clauses:
-                        if verbose:
-                            print("Result: SATISFIABLE")
-                        return True
-                    pure_clauses = pure_literal_elimination(unit_clauses, verbose=verbose)
-                    if not pure_clauses:
-                        if verbose:
-                            print("Result: SATISFIABLE")
-                        return True
-                    if new_clauses != pure_clauses:
-                        clauses = list(map(frozenset, pure_clauses))
-                        diff = True
-                        break
-            if diff:
-                break
+
+        # If no new resolvents were added, it's SAT
         if not new:
             if verbose:
                 print("\nNo new resolvent to be added")
                 print("Result: SATISFIABLE")
             return True
-        if not diff:
-            clauses.extend(new)
+
+        # Add new resolvents to clauses
+        clauses.extend(new)
+
+        # Apply unit propagation and pure literal elimination after each round
+        if dp:
+            # Apply unit propagation
+            clauses, counter = unit_propagation(clauses, verbose=verbose)
+            if clauses is False:
+                if verbose:
+                    print("Result: UNSATISFIABLE")
+                return False
+            if not clauses:
+                if verbose:
+                    print("Result: SATISFIABLE")
+                return True
+
+            # Apply pure literal elimination
+            clauses = pure_literal_elimination(clauses, verbose=verbose)
+            if not clauses:
+                if verbose:
+                    print("Result: SATISFIABLE")
+                return True
 
 # Public interface for resolution-only
 def resolution(clauses, verbose=True):
