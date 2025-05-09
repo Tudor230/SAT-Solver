@@ -55,7 +55,6 @@ def convert_clauses_to_solver_format(clauses):
     solver_clauses = []
 
     for clause in clauses:
-        # Convert each clause into the format used by your solver (no changes needed in this case)
         solver_clauses.append(clause)
 
     return solver_clauses
