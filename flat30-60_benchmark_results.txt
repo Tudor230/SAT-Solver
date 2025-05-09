@@ -1,0 +1,37 @@
+Benchmark Results for folder: tests/flat30-60
+
+Method: first
+  Average Time: 0.0024 seconds
+  Average Splits: 18.92
+  Failed Files: None
+
+Method: MAXO
+  Average Time: 0.0029 seconds
+  Average Splits: 24.6
+  Failed Files: None
+
+Method: MOMS
+  Average Time: 0.0033 seconds
+  Average Splits: 24.6
+  Failed Files: None
+
+Method: MAMS
+  Average Time: 0.0019 seconds
+  Average Splits: 10.04
+  Failed Files: None
+
+Method: JW
+  Average Time: 0.0039 seconds
+  Average Splits: 24.6
+  Failed Files: None
+
+Method: GUP
+  Average Time: 0.0352 seconds
+  Average Splits: 10.15
+  Failed Files: None
+
+Method: SUP
+  Average Time: 0.0044 seconds
+  Average Splits: 10.02
+  Failed Files: None
+

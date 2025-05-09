@@ -1,0 +1,17 @@
+Benchmark Results for folder: tests/uf7-40
+
+Method: resolution
+  Average Time: 4.5964 seconds
+  Average Splits: 0.0
+  Failed Files: None
+
+Method: dp
+  Average Time: 0.8644 seconds
+  Average Splits: 0.0
+  Failed Files: None
+
+Method: first
+  Average Time: 0.0001 seconds
+  Average Splits: 3.31
+  Failed Files: None
+

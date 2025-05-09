@@ -1,0 +1,37 @@
+Benchmark Results for folder: tests/uuf75-325
+
+Method: first
+  Average Time: 0.4009 seconds
+  Average Splits: 1440.51
+
+
+Method: MAXO
+  Average Time: 0.1253 seconds
+  Average Splits: 390.65
+
+
+Method: MOMS
+  Average Time: 0.0583 seconds
+  Average Splits: 181.21
+
+
+Method: MAMS
+  Average Time: 0.0623 seconds
+  Average Splits: 164.48
+
+
+Method: JW
+  Average Time: 0.0840 seconds
+  Average Splits: 216.79
+
+
+Method: GUP
+  Average Time: 0.1768 seconds
+  Average Splits: 99.5
+
+
+Method: SUP
+  Average Time: 0.2073 seconds
+  Average Splits: 248.28
+
+

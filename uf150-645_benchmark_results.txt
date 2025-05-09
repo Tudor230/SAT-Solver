@@ -1,0 +1,44 @@
+Benchmark Results for folder: tests/uf150-645
+
+Method: first
+  Average Time: 104.5147 seconds
+  Average Memory Usage: 64.61 KB
+  Average Splits: 155293.69696969696
+  Failed Files: None
+
+Method: MAXO
+  Average Time: 5.7753 seconds
+  Average Memory Usage: 64.75 KB
+  Average Splits: 7746.181818181818
+  Failed Files: None
+
+Method: MOMS
+  Average Time: 1.8729 seconds
+  Average Memory Usage: 64.76 KB
+  Average Splits: 2435.757575757576
+  Failed Files: None
+
+Method: MAMS
+  Average Time: 1.8803 seconds
+  Average Memory Usage: 64.76 KB
+  Average Splits: 2042.939393939394
+  Failed Files: None
+
+Method: JW
+  Average Time: 1.7689 seconds
+  Average Memory Usage: 64.76 KB
+  Average Splits: 2044.010101010101
+  Failed Files: None
+
+Method: GUP
+  Average Time: 8.4232 seconds
+  Average Memory Usage: 64.88 KB
+  Average Splits: 1372.1616161616162
+  Failed Files: None
+
+Method: SUP
+  Average Time: 8.6709 seconds
+  Average Memory Usage: 64.90 KB
+  Average Splits: 4680.121212121212
+  Failed Files: None
+

@@ -1,0 +1,37 @@
+Benchmark Results for folder: tests/uf100-430
+
+Method: first
+  Average Time: 2.0729 seconds
+  Average Splits: 5209.17
+  Failed Files: None
+
+Method: MAXO
+  Average Time: 0.1952 seconds
+  Average Splits: 400.3
+  Failed Files: None
+
+Method: MOMS
+  Average Time: 0.1022 seconds
+  Average Splits: 207.33
+  Failed Files: None
+
+Method: MAMS
+  Average Time: 0.1072 seconds
+  Average Splits: 181.07
+  Failed Files: None
+
+Method: JW
+  Average Time: 0.0985 seconds
+  Average Splits: 179.58
+  Failed Files: None
+
+Method: GUP
+  Average Time: 0.6728 seconds
+  Average Splits: 193.17
+  Failed Files: None
+
+Method: SUP
+  Average Time: 0.3776 seconds
+  Average Splits: 331.98
+  Failed Files: None
+

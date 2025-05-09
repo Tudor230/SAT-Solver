@@ -1,0 +1,30 @@
+Benchmark Results for folder: tests/uuf50-218
+
+Method: first
+  Average Time: 0.0339 seconds
+  Average Splits: 207.05
+
+Method: MAXO
+  Average Time: 0.0156 seconds
+  Average Splits: 80.79
+
+Method: MOMS
+  Average Time: 0.0098 seconds
+  Average Splits: 48.47
+
+Method: MAMS
+  Average Time: 0.0108 seconds
+  Average Splits: 44.97
+
+Method: JW
+  Average Time: 0.0131 seconds
+  Average Splits: 54.49
+
+Method: GUP
+  Average Time: 0.0294 seconds
+  Average Splits: 32.89
+
+Method: SUP
+  Average Time: 0.0327 seconds
+  Average Splits: 65.45
+

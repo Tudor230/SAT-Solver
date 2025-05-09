@@ -1,0 +1,17 @@
+Benchmark Results for folder: tests/uf8-20
+
+Method: resolution
+  Average Time: 28.0327 seconds
+  Average Splits: 0.0
+  Failed Files: None
+
+Method: dp
+  Average Time: 19.7814 seconds
+  Average Splits: 0.0
+  Failed Files: None
+
+Method: first
+  Average Time: 0.0000 seconds
+  Average Splits: 2.9
+  Failed Files: None
+

@@ -1,0 +1,37 @@
+Benchmark Results for folder: tests/uf75-325
+
+Method: first
+  Average Time: 0.1444 seconds
+  Average Splits: 501.3030303030303
+  Failed Files: None
+
+Method: MAXO
+  Average Time: 0.0324 seconds
+  Average Splits: 106.87878787878788
+  Failed Files: None
+
+Method: MOMS
+  Average Time: 0.0200 seconds
+  Average Splits: 68.85858585858585
+  Failed Files: None
+
+Method: MAMS
+  Average Time: 0.0234 seconds
+  Average Splits: 63.37373737373738
+  Failed Files: None
+
+Method: JW
+  Average Time: 0.0238 seconds
+  Average Splits: 68.76767676767676
+  Failed Files: None
+
+Method: GUP
+  Average Time: 0.1319 seconds
+  Average Splits: 70.54545454545455
+  Failed Files: None
+
+Method: SUP
+  Average Time: 0.0817 seconds
+  Average Splits: 104.5050505050505
+  Failed Files: None
+

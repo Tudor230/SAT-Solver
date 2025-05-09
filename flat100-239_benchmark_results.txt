@@ -1,0 +1,37 @@
+Benchmark Results for folder: tests/flat100-239
+
+Method: first
+  Average Time: 5.4100 seconds
+  Average Splits: 3093.83
+  Failed Files: None
+
+Method: MAXO
+  Average Time: 0.6233 seconds
+  Average Splits: 343.92
+  Failed Files: None
+
+Method: MOMS
+  Average Time: 0.6578 seconds
+  Average Splits: 343.92
+  Failed Files: None
+
+Method: MAMS
+  Average Time: 0.5446 seconds
+  Average Splits: 270.84
+  Failed Files: None
+
+Method: JW
+  Average Time: 0.6872 seconds
+  Average Splits: 343.92
+  Failed Files: None
+
+Method: GUP
+  Average Time: 2.3091 seconds
+  Average Splits: 67.96
+  Failed Files: None
+
+Method: SUP
+  Average Time: 1.1343 seconds
+  Average Splits: 275.21
+  Failed Files: None
+

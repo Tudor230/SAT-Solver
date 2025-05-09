@@ -1,0 +1,37 @@
+Benchmark Results for folder: tests/uf20-91
+
+Method: first
+  Average Time: 0.0005 seconds
+  Average Splits: 9.162
+  Failed Files: None
+
+Method: MAXO
+  Average Time: 0.0004 seconds
+  Average Splits: 6.778
+  Failed Files: None
+
+Method: MOMS
+  Average Time: 0.0004 seconds
+  Average Splits: 6.966
+  Failed Files: None
+
+Method: MAMS
+  Average Time: 0.0005 seconds
+  Average Splits: 5.859
+  Failed Files: None
+
+Method: JW
+  Average Time: 0.0005 seconds
+  Average Splits: 6.696
+  Failed Files: None
+
+Method: GUP
+  Average Time: 0.0014 seconds
+  Average Splits: 6.968
+  Failed Files: None
+
+Method: SUP
+  Average Time: 0.0012 seconds
+  Average Splits: 6.593
+  Failed Files: None
+
